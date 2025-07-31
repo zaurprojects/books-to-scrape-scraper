@@ -9,11 +9,11 @@ page = requests.get(url)
 
 soup = BeautifulSoup(page.text, 'html.parser')
 
-# There are two ways of doing this (I will use the second one):
+# There are two ways of doing this (I will use the first one):
 # result = soup.find('table', class_ = 'wikitable sortable')
-# result = soup.find_all('table')[1]
+# result = soup.find_all('table')[1] // could be wrong
 
-table = soup.find_all('table')[1]
+table = soup.find('table', class_ = 'wikitable sortable')
 
 world_titles = table.find_all('th')
 
@@ -33,4 +33,4 @@ for row in column_data[1:]:
     df.loc[length] = individual_row_data
 
 
-df.to_csv(r'C:\Users\User\PyCharmMiscProject\companies.csv')
+df.to_csv(r'C:\Users\User\PyCharmMiscProject\companies.csv', index = False)
